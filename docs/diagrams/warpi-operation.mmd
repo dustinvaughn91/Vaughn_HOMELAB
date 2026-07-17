@@ -1,0 +1,9 @@
+flowchart TD
+    Boot[Boot] --> Detect[Hardware Detection]
+    Detect --> Mode[Mode Selection]
+    Mode --> Validate[Environment Validation]
+    Validate --> Report[kernel-report]
+    Validate --> Security[kernel-security]
+    Security --> Results[Results]
+    Report --> Logs[Logs]
+    Results --> Logs

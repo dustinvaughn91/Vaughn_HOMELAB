@@ -1,0 +1,8 @@
+flowchart TD
+    Change[Engineering Change] --> Docs[Documentation Update]
+    Docs --> Sanitize[Sanitization Review]
+    Sanitize --> Secrets[Secret Scan]
+    Secrets --> Patterns[Private Detail Scan]
+    Patterns --> Lint[Markdown and Link Checks]
+    Lint --> Review[Manual Review]
+    Review --> Push[GitHub Push]

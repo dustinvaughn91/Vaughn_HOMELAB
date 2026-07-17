@@ -4,6 +4,15 @@ Public documentation for VaughnLab: a home AI, cybersecurity, and infrastructure
 
 This repository is intentionally sanitized for public sharing. It documents architecture, operating patterns, and project direction without publishing live secrets, private network details, customer data, or credentials.
 
+## Start Here
+
+- [Architecture](docs/architecture.md) - how the lab is organized.
+- [Security model](docs/security-model.md) - trust boundaries, approvals, and safety rules.
+- [Sanitized inventory](docs/inventory.md) - public-safe system roles.
+- [Roadmap](docs/roadmap.md) - completed work and next priorities.
+- [WARPi remote operations](docs/runbooks/warpi-remote-ops.md) - approved field-device command pattern.
+- [Security policy](SECURITY.md) - responsible disclosure and scope.
+
 ## What This Lab Is
 
 VaughnLab is a personal research and operations environment for:
@@ -42,12 +51,14 @@ K.E.R.N.E.L. helps maintain documentation, inspect approved systems, coordinate 
 ## Repository Layout
 
 ```text
+SECURITY.md                 Responsible disclosure and project security scope
 docs/
   architecture.md          High-level lab architecture
   inventory.md             Sanitized system inventory
   security-model.md        Trust boundaries and safety rules
   audit-findings.md        Current audit snapshot
   roadmap.md               Near-term milestones
+  diagrams/                Mermaid diagram source
   runbooks/
     warpi-remote-ops.md    Approved WARPi remote operations
 ```
@@ -64,3 +75,10 @@ This repo intentionally avoids:
 
 The goal is to show the architecture and engineering process without exposing the lab.
 
+## Repository Topics
+
+Suggested GitHub topics:
+
+```text
+homelab, ai-ops, cybersecurity, raspberry-pi, proxmox, documentation, security-automation, warpi, openclaw, ai-governance
+```

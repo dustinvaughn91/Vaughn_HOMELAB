@@ -57,4 +57,3 @@ kernel-security <approved-command> <target>
 ```
 
 Do not bypass an approved wrapper with raw tooling unless explicitly approved.
-

@@ -4,11 +4,44 @@
 !.env.example
 .secrets/
 secrets/
+secret/
+private/
+vault/
+vault-*/
 *.key
 *.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.csr
+*.jks
 id_ed25519*
 id_rsa*
 known_hosts
+kubeconfig
+*.kubeconfig
+.kube/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.tfvars
+.terraform/
+*.pcap
+*.pcapng
+*.cap
+*.har
+*.dump
+*.sql
+*.sqlite3
+*.db-shm
+*.db-wal
+*.bak
+*.backup
+*.envrc
+*.age
+*.gpg
+*.asc
 
 # Runtime output
 *.log
@@ -16,9 +49,19 @@ known_hosts
 *.db
 tmp/
 reports/private/
+reports/evidence/
+evidence/
+artifacts/private/
+memory/*.db
+memory/*.sqlite
+vectors/
+vectorstore/
+chroma/
+qdrant/
+faiss/
+weaviate/
 
 # OS/editor
 .DS_Store
 .vscode/
 .idea/
-

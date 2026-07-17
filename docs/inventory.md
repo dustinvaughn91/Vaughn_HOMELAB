@@ -1,45 +1,37 @@
 # Sanitized Inventory
 
-This inventory is intentionally public-safe. It describes system roles and current observed state without live private addresses, credentials, or sensitive business details.
+This inventory is intentionally public-safe. It describes system roles and intended operating posture without live private addresses, credentials, or sensitive business details.
 
 ## Systems
 
-| System | Role | Platform | Public-Safe State |
+| System | Role | Platform | Public-Safe Posture |
 | --- | --- | --- | --- |
-| Proxmox host | Virtualization platform | Proxmox VE 8.x | Online and healthy |
-| OpenClaw/K.E.R.N.E.L. node | AI operations workspace | Linux container/host | Active control-plane environment |
+| Proxmox host | Virtualization platform | Proxmox VE | Private virtualization layer |
+| OpenClaw/K.E.R.N.E.L. node | AI operations workspace | Linux container/host | Protected control-plane environment |
 | Mission control backend | WARPi service backend | Linux VM | Protected operations service |
-| WARPi | Portable security field platform | Raspberry Pi / Debian | Normal mode, connected, healthy |
-| AI lab VM | Local AI and security experimentation | Ubuntu VM | Stopped by default |
-| DERP | Deliberately vulnerable AI/security target | Ubuntu container or VM | Stopped by default |
-| Automation VM | Private workflow automation host | Ubuntu VM | Running, private access only |
+| WARPi | Portable security field platform | Raspberry Pi / Debian | Approved field and lab security platform |
+| AI lab VM | Local AI and security experimentation | Ubuntu VM | Isolated experimentation environment |
+| DERP | Deliberately vulnerable AI/security target | Ubuntu container or VM | Isolated training target |
+| Automation VM | Private workflow automation host | Ubuntu VM | Private automation environment |
 
-## Proxmox Lab Pool Snapshot
+## Proxmox Lab Pool Description
 
-Recent read-only inventory showed:
+The lab virtualization layer is designed around:
 
-- Lab pool available
-- Proxmox host online
-- DERP target stopped
-- AI lab VM stopped
-- Automation VM running
-- Local storage active with healthy free space
-- Routine automation access limited to approved lab resources
+- Purpose-built VMs and containers.
+- Least-privilege automation where available.
+- Recovery through snapshots and rebuildable configuration.
+- Public documentation that describes roles without publishing live state.
 
-## WARPi Snapshot
+## WARPi Public Description
 
-Recent WARPi report showed:
+WARPi is documented publicly by capability rather than by live operational telemetry:
 
-- Mode: Normal
-- State: Connected
-- Trusted Wi-Fi: available
-- Tailscale: active
-- Mission backend: healthy
-- GPS service: running, searching for fix
-- Kismet: disabled at boot by design
-- SSH: active
-- Root disk: low utilization
-- Temperature: normal operating range
+- Field and lab operating modes.
+- Approved reporting wrapper.
+- Approved security command wrapper.
+- Hardware-aware status collection.
+- Explicit approval before modifications or non-approved security actions.
 
 ## Excluded From Public Inventory
 
@@ -51,4 +43,3 @@ The following are intentionally not published:
 - Personal account identifiers
 - Employer/customer workflow details
 - Exact SSH keys, usernames, or credentials
-

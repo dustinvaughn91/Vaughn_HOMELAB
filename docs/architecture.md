@@ -31,6 +31,15 @@ WARPi
       +-- Approved security command wrapper
 ```
 
+Mermaid source:
+
+- [High-level architecture](diagrams/architecture.mmd)
+- [AI decision workflow](diagrams/ai-decision.mmd)
+- [Trust boundaries](diagrams/trust-boundary.mmd)
+- [Public release pipeline](diagrams/release-pipeline.mmd)
+- [Disaster recovery workflow](diagrams/disaster-recovery.mmd)
+- [WARPi operation flow](diagrams/warpi-operation.mmd)
+
 ## Control Plane
 
 K.E.R.N.E.L. runs from the OpenClaw operations environment and acts as the documentation and automation coordinator. It uses least-privilege access where possible and avoids direct control of protected systems unless explicitly approved.
@@ -60,3 +69,25 @@ Active security tooling belongs on WARPi or other approved security devices, not
 
 DERP is a deliberately vulnerable AI/security target used for prompt-injection, secret-handling, and defensive AI workflow experiments. DERP is isolated by design and must never hold real secrets or trusted production access.
 
+## Public Release Workflow
+
+```text
+Engineering Change
+      |
+      v
+Documentation Update
+      |
+      v
+Sanitization Review
+      |
+      v
+Automated Release Gate
+      |
+      v
+Manual Approval
+      |
+      v
+GitHub Push
+```
+
+The public release path favors architecture, governance, and sanitized workflows over operational dumps. Exact service discovery, live state, private addresses, and sensitive access details stay out of the public repository.

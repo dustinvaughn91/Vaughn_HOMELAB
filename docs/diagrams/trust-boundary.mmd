@@ -1,0 +1,33 @@
+flowchart TD
+    Human[Human Operator]
+
+    subgraph Control[AI Control Plane]
+        Kernel[K.E.R.N.E.L. / OpenClaw]
+        Docs[Docs and Runbooks]
+    end
+
+    subgraph Trusted[Trusted Infrastructure]
+        Proxmox[Virtualization Layer]
+        Mission[Mission Control]
+        Automation[Private Automation]
+    end
+
+    subgraph Field[Field Device Boundary]
+        WARPi[WARPi]
+        Wrappers[Approved Wrappers]
+    end
+
+    subgraph Sandbox[DERP Isolation Boundary]
+        DERP[DERP Training Target]
+        Experiments[AI Security Experiments]
+    end
+
+    Human --> Kernel
+    Kernel --> Docs
+    Kernel --> Proxmox
+    Kernel --> WARPi
+    WARPi --> Wrappers
+    Proxmox --> Mission
+    Proxmox --> Automation
+    Kernel -. approval required .-> Sandbox
+    DERP --> Experiments

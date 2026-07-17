@@ -1,0 +1,9 @@
+flowchart TD
+    Failure[Failure] --> Detect[Detection]
+    Detect --> Kernel[K.E.R.N.E.L. Assessment]
+    Kernel --> Approval{Human Approval Needed?}
+    Approval -- Yes --> Human[Human Approval]
+    Approval -- No --> Recover[Recovery Action]
+    Human --> Recover
+    Recover --> Validate[Validation]
+    Validate --> Document[Document Result]

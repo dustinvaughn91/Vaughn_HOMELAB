@@ -1,0 +1,109 @@
+name: Public Release Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  secret-scan:
+    name: Secret scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: TruffleHog
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+
+  documentation-quality:
+    name: Documentation quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Markdown lint
+        uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          globs: "**/*.md"
+      - name: Link check
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --offline "**/*.md"
+
+  public-safety-patterns:
+    name: Public safety pattern scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect private infrastructure details
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          fail=0
+
+          check() {
+            local label="$1"
+            local pattern="$2"
+            if git grep -nE "$pattern" -- ':!*.png' ':!*.jpg' ':!*.jpeg' ':!*.gif' ':!*.svg'; then
+              echo "::error::$label detected in public repository"
+              fail=1
+            fi
+          }
+
+          check "RFC1918 private IP address" '(^|[^0-9])(10\.([0-9]{1,3}\.){2}[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[0-1])\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3})([^0-9]|$)'
+          check "Tailscale CGNAT address" '(^|[^0-9])100\.(6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])\.[0-9]{1,3}\.[0-9]{1,3}([^0-9]|$)'
+          check "Tailscale hostname" 'tail[a-z0-9-]*\.ts\.net|tail[n]et|tailscale\.com/dns'
+          check "Exact service port disclosure" '(^|[^0-9])([0-9]{1,5})/(tcp|udp)([^a-zA-Z]|$)|https?://[^[:space:])>]+:[0-9]{2,5}'
+          check "SSH private key marker" 'BEGIN (OPENSSH|RSA|DSA|EC|ED25519) PRIVATE KEY'
+          check "Likely API token assignment" '(api[_-]?key|token|secret|client[_-]?secret)[[:space:]]*[:=][[:space:]]*["'\''][A-Za-z0-9_./+=-]{16,}'
+
+          exit "$fail"
+
+  mermaid:
+    name: Mermaid validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Mermaid browser dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libasound2t64 \
+            libatk-bridge2.0-0 \
+            libatk1.0-0 \
+            libcups2 \
+            libdrm2 \
+            libgbm1 \
+            libglib2.0-0 \
+            libgtk-3-0 \
+            libnss3 \
+            libx11-xcb1 \
+            libxcomposite1 \
+            libxdamage1 \
+            libxrandr2
+      - name: Validate Mermaid diagrams
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for diagram in docs/diagrams/*.mmd; do
+            npx -y @mermaid-js/mermaid-cli -i "$diagram" -o "/tmp/$(basename "$diagram").svg" -b transparent
+          done

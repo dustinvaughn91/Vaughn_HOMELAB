@@ -1,0 +1,10 @@
+flowchart TD
+    Request[User Request] --> Kernel[K.E.R.N.E.L.]
+    Kernel --> Classify[Risk Classification]
+    Classify --> Safe{Approval Required?}
+    Safe -- No --> Execute[Execute Approved Task]
+    Safe -- Yes --> Approval[Human Approval]
+    Approval --> Execute
+    Execute --> Log[Log Result]
+    Log --> Validate[Validate Outcome]
+    Validate --> Summary[Report Summary]

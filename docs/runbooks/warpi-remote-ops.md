@@ -37,4 +37,3 @@ kernel-security scan 127.0.0.1
 ```
 
 This scans WARPi's own localhost through the approved wrapper.
-

@@ -1,13 +1,21 @@
 # Roadmap
 
+## Completed Baseline
+
+- Created public-safe documentation baseline.
+- Set up the public GitHub repository structure.
+- Added sanitized architecture, inventory, security model, audit, roadmap, and WARPi runbook documents.
+- Added initial Mermaid architecture source.
+- Documented private/public separation expectations.
+
 ## Near Term
 
-- Finish public-safe documentation baseline.
-- Set up the public GitHub repository.
-- Add a sanitized architecture diagram.
+- Strengthen the public release gate with automated checks.
+- Keep public docs free of exact ports, live state, private addresses, and Tailscale hostnames.
 - Fix WARPi documentation drift around mode scripts.
 - Expand WARPi documentation under its local docs directory.
-- Add repeatable environment audit scripts that produce redacted output.
+- Add repeatable environment audit scripts that produce redacted public output.
+- Add rendered architecture and workflow diagrams.
 
 ## Medium Term
 
@@ -25,4 +33,3 @@
 - Stronger secrets management.
 - Automated documentation drift detection.
 - Safer public demo environment for AI security workflows.
-
