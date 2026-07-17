@@ -1,0 +1,24 @@
+# Secrets and private state
+.env
+.env.*
+!.env.example
+.secrets/
+secrets/
+*.key
+*.pem
+id_ed25519*
+id_rsa*
+known_hosts
+
+# Runtime output
+*.log
+*.sqlite
+*.db
+tmp/
+reports/private/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+

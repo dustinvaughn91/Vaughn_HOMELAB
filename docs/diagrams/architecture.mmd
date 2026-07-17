@@ -1,0 +1,21 @@
+flowchart TD
+    Human[Human Operator] --> Kernel[K.E.R.N.E.L. / OpenClaw]
+
+    Kernel --> Docs[Documentation and Runbooks]
+    Kernel --> Proxmox[Proxmox Host]
+    Kernel --> WARPi[WARPi Field Platform]
+
+    Proxmox --> Mission[Mission Control Backend]
+    Proxmox --> LabAI[AI Lab VM]
+    Proxmox --> DERP[DERP Security Target]
+    Proxmox --> Automation[Private Automation VM]
+
+    WARPi --> Normal[Normal Mode]
+    WARPi --> Field[Field Mode]
+    WARPi --> Report[kernel-report]
+    WARPi --> Security[kernel-security]
+
+    DERP -. isolated .-> Experiments[AI Security Experiments]
+
+    Docs --> PublicRepo[Public GitHub Docs]
+
