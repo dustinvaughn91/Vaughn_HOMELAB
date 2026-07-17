@@ -26,8 +26,6 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: ./
-          base: ${{ github.event.repository.default_branch }}
-          head: HEAD
           extra_args: --debug --only-verified
 
   documentation-quality:
@@ -105,5 +103,9 @@ jobs:
           set -euo pipefail
           shopt -s nullglob
           for diagram in docs/diagrams/*.mmd; do
-            npx -y @mermaid-js/mermaid-cli -i "$diagram" -o "/tmp/$(basename "$diagram").svg" -b transparent
+            npx -y @mermaid-js/mermaid-cli \
+              -p .github/mermaid-puppeteer.json \
+              -i "$diagram" \
+              -o "/tmp/$(basename "$diagram").svg" \
+              -b transparent
           done
