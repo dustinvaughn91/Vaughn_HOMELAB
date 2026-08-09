@@ -1,21 +1,62 @@
 flowchart TD
     Human[Human Operator] --> Kernel[K.E.R.N.E.L. / OpenClaw]
-
     Kernel --> Docs[Documentation and Runbooks]
-    Kernel --> Proxmox[Proxmox Host]
+    Kernel --> PVE[Proxmox Virtualization Layer]
     Kernel --> WARPi[WARPi Field Platform]
 
-    Proxmox --> Mission[Mission Control Backend]
-    Proxmox --> LabAI[AI Lab VM]
-    Proxmox --> DERP[DERP Security Target]
-    Proxmox --> Automation[Private Automation VM]
+    subgraph Mgmt[Management / Recovery LAN]
+        OpenClaw[OpenClaw / K.E.R.N.E.L. Node]
+        DNS[AdGuard DNS / dns01]
+        Guardian[Guardian SIEM / Wazuh]
+        OpenWrt[OpenWrt Lab Router]
+    end
 
-    WARPi --> Normal[Normal Mode]
-    WARPi --> Field[Field Mode]
-    WARPi --> Report[kernel-report]
-    WARPi --> Security[kernel-security]
+    PVE --> Mgmt
 
-    DERP -. isolated .-> Experiments[AI Security Experiments]
+    subgraph Core[Always-On Core Services]
+        Holocron[Holocron Private UI]
+        Tickets[GLPI Ticketing]
+    end
+
+    subgraph Routed[OpenWrt Routed Lab Segments]
+        PentestSeg[Pentest Segment\n10.66.x.x family]
+        SecuritySeg[Security Segment\n10.66.x.x family]
+        ServicesSeg[Services Segment\n10.66.x.x family]
+        AILabSeg[AI / Lab Segment\n10.66.x.x family]
+        TriageSeg[Triage Segment\n10.66.x.x family]
+    end
+
+    subgraph OnDemand[On-Demand Workloads]
+        Mission[Mission Control Backend]
+        DERP[DERP AI Security Target]
+        LabAI[AI Lab VM]
+        BayDispatch[Workflow Automation VM]
+        MalTriage[Malware Triage VM]
+        Pentest[Kali / Pentest VM]
+    end
+
+    OpenWrt --> Routed
+    Routed --> Core
+    Routed --> OnDemand
+
+    DNS -. advertised resolver .-> Routed
+    OpenWrt -. blocks direct DNS bypass .-> Routed
+
+    OpenWrt -. syslog and firewall events .-> Guardian
+    Kernel -. sanitized Proxmox telemetry .-> Guardian
+    Guardian -. local sensor only, no full bridge mirror .-> Mgmt
+
+    Holocron --> Tickets
+    Holocron --> OpenClaw
+
+    Tailscale[Tailscale Private Overlay\nwhere approved] -. private access .-> Core
+    Tailscale -. private management .-> OnDemand
+
+    WARPi --> Field[Field Mode / Approved Security Wrappers]
+    WARPi --> Mission
+
+    DERP -. isolated training target .-> AILabSeg
+    Pentest --> PentestSeg
+    MalTriage --> TriageSeg
 
     Docs --> PublicRepo[Public GitHub Docs]
-
