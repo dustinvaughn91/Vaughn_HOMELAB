@@ -9,13 +9,15 @@
 - Documented private/public separation expectations.
 - Documented Guardian defensive monitoring, OpenWrt routed lab segmentation, AdGuard DNS policy, K.E.R.N.E.L. key-based administrative model, and current always-on/on-demand power posture.
 - Added a maintainable architecture diagram showing the control plane, routed lab segments, DNS policy, monitoring flows, core services, on-demand systems, and Tailscale at a public-safe abstraction level.
+- Added a branded WARPi project overview with its dedicated platform logo, operating model, security boundaries, remote-operation wrappers, and public-safe mode-dispatcher documentation.
+- Refreshed the WARPi remote-operations runbook around approved wrappers, safe-stop behavior, dry-run mode planning, and public repository boundaries.
 
 ## Near Term
 
 - Strengthen the public release gate with automated checks.
 - Keep public docs free of exact host-level private addresses, live service URLs, credentials, Tailscale hostnames, and raw scan output.
-- Fix WARPi documentation drift around mode scripts.
-- Expand WARPi documentation under its local docs directory.
+- Keep WARPi mode-dispatcher and remote-operations documentation synchronized with validated implementation milestones.
+- Expand WARPi documentation as additional field workflows reach stable checkpoints.
 - Add repeatable environment audit scripts that produce redacted public output.
 - Add rendered architecture and workflow diagrams.
 - Add a public-safe restoration and power-state operations summary.
