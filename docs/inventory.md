@@ -41,11 +41,11 @@ K.E.R.N.E.L. uses named administrative identities and key-based access where sup
 
 ### Holocron
 
-Holocron is the private web UI for K.E.R.N.E.L. and family-facing workflows. It provides a controlled interface for chat, tickets, household announcements, and local app features while preserving role boundaries.
+Holocron is the private web UI for K.E.R.N.E.L. and family-facing workflows. It provides a controlled interface for chat, tickets, household announcements, shared terminal use, household calendar workflows, and local app features while preserving role boundaries.
 
 Holocron is always-on because it is a private service surface and a user entry point. It depends on the OpenClaw/K.E.R.N.E.L. side for agent responses and on the ticketing system for GLPI-backed ticket intake.
 
-Holocron application users are separate from Linux machine-login accounts. Public docs describe the role model without publishing live user records, private URLs, session keys, or credentials.
+Holocron application users are separate from Linux machine-login accounts. A Family Terminal mode provides a shared/tablet-oriented station identity for household use without turning that station into a personal account. Public docs describe the role model without publishing live user records, private URLs, session keys, calendar identifiers, or credentials.
 
 ### AdGuard DNS
 

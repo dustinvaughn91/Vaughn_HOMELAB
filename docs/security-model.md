@@ -29,6 +29,13 @@ K.E.R.N.E.L.:
 - Recommends changes before risky operations
 - Uses named key-based administrative access where supported
 
+Holocron Family Terminal:
+
+- Represents a shared station identity, not a private personal account
+- Preserves Holocron role boundaries and per-session context separation
+- Should not be used to infer which person is physically at the tablet unless that person identifies themselves
+- Keeps calendar/OAuth material and private family context out of public documentation
+
 WARPi:
 
 - Runs approved security and field tooling
@@ -72,6 +79,7 @@ Before publishing:
 - Remove customer or employer details
 - Avoid raw logs unless sanitized
 - Prefer architecture summaries over operational dumps
+- Do not publish private calendar identifiers, OAuth tokens, event contents, Tailscale names, or shared-device session details
 
 ## Approved Security Activity Pattern
 

@@ -19,6 +19,7 @@ Proxmox Host
       |
       +-- Always-on core services
       |     +-- Holocron private UI
+      |     |     +-- Shared family tablet/terminal mode
       |     +-- AdGuard DNS staging resolver
       |     +-- OpenWrt routed lab boundary
       |     +-- GLPI ticketing
@@ -89,6 +90,12 @@ Guardian also runs IDS tooling locally, but it does **not** have full packet vis
 Some private services use Tailscale for approved remote management or private service access. This repository documents Tailscale usage only at the architecture level and does not publish Tailscale DNS names, auth keys, session details, or device identifiers.
 
 Public Internet exposure is not part of the default VaughnLab model. Any public exposure would require explicit approval and separate documentation.
+
+## Holocron Family Interface
+
+Holocron is the private family-facing UI layer for K.E.R.N.E.L. It supports normal personal Holocron accounts and a shared Family Terminal mode intended for tablet/station use. The shared terminal follows the normal Holocron visual language and role boundaries rather than becoming a separate product.
+
+Household calendar workflows are routed through Holocron while keeping OAuth material, calendar identifiers, and event details outside public documentation. Holocron is fronted by a private reverse proxy for a cleaner internal URL, but that proxy does not represent public Internet exposure.
 
 ## Administrative Identity
 
