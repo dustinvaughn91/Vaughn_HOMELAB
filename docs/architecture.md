@@ -11,15 +11,17 @@ Human Operator
 K.E.R.N.E.L. / OpenClaw
       |
       +-- Documentation and runbook maintenance
-      +-- Proxmox lab inventory and VM lifecycle operations
+      +-- Proxmox cluster inventory and VM lifecycle operations
       +-- Approved SSH/key-based administrative workflows
       +-- WARPi read-only reporting and approved security wrappers
 
-Proxmox Host
+VaughnLab Proxmox Cluster
+      |
+      +-- pve01: primary workload host / segmented virtual networking
+      +-- pve02: second compute node / cluster capacity and resilience
       |
       +-- Always-on core services
       |     +-- Holocron private UI
-      |     |     +-- Shared family tablet/terminal mode
       |     +-- AdGuard DNS staging resolver
       |     +-- OpenWrt routed lab boundary
       |     +-- GLPI ticketing
@@ -53,11 +55,15 @@ The control plane is intentionally separated from on-demand lab workloads. This 
 
 ## Virtualization Layer
 
-The lab uses Proxmox to host small purpose-built VMs and containers. Routine automation uses a limited Proxmox token scoped to approved lab resources instead of broad root access.
+VaughnLab now uses a two-node Proxmox VE cluster named `VaughnLab`. Both nodes run the same Proxmox VE 8.4 release family and participate in Corosync quorum. Cluster communication uses the private management LAN, while Tailscale provides an additional approved private management path.
 
-Core services and routed workloads share the same virtualization platform, but their operating posture differs. Always-on services run the private UI, DNS, routing, ticketing, and monitoring backbone. On-demand workloads stay powered off unless a specific workflow requires them.
+`pve01` remains the established workload host and carries the existing segmented virtual bridges and core services. `pve02` adds independent compute capacity and a second administrative/cluster node. Joining the nodes provides centralized cluster management and workload placement options; it does not by itself aggregate CPU/RAM into a single machine or provide automatic workload high availability.
 
-Public docs describe roles and resource classes rather than exposing private host-level addresses, token IDs, or exact access paths.
+The two-node cluster currently requires both node votes for normal quorum. A separate third-vote/qdevice design is planned rather than placing duplicate quorum voters inside the two failure domains they are intended to arbitrate.
+
+Host firewall policy is enabled with default-deny inbound behavior and explicit allowances for trusted management traffic. Management access is limited to approved private LAN/Tailscale paths, while cluster communication remains restricted to the participating nodes. K.E.R.N.E.L. has validated key-based administrative reachability to both hypervisors. Exact host IP addresses, Tailscale addresses, keys, and other rebuild-sensitive details remain outside this public repository.
+
+Routine automation should continue to use constrained identities and scoped access wherever practical. Broad host-level root authority remains an explicitly approved maintenance path rather than an assumed agent capability.
 
 ## Routed Lab Networking
 
@@ -77,7 +83,7 @@ OpenWrt is not the household router. It routes VaughnLab lab segments, provides 
 
 AdGuard Home provides controlled DNS for routed lab workloads. OpenWrt DHCP advertises the AdGuard resolver to lab segments, and OpenWrt rejects direct DNS bypass attempts from routed workloads to other resolvers.
 
-The DNS design remains staged and private. Household-wide router or client DNS cutover is intentionally not implied by the public documentation.
+A separate Raspberry Pi 5 network-core concept (`netcore01`) is being planned as a future external DNS/Tailscale services module and possible foundation for broader portable/private-network functions. It is not yet documented as a production dependency, router replacement, or quorum voter.
 
 ## Defensive Monitoring
 
@@ -101,18 +107,11 @@ Household calendar workflows are routed through Holocron while keeping OAuth mat
 
 Supported Linux guests use a named `kernel` administrative identity with SSH key-based access. `kernel` passwords are disabled where standardized, and routine administrative work uses key-based SSH plus approved sudo rights.
 
-Linux root remains a local/console break-glass identity. Root SSH is not a routine access path. Appliance systems such as OpenWrt are documented as platform-specific exceptions rather than forced into a normal Linux sudo model.
+Linux root remains a local/console break-glass identity. Root SSH is not a routine access path. Hypervisor maintenance and appliance systems are documented as explicitly approved/platform-specific exceptions rather than forced into the normal guest sudo model.
 
 ## WARPi Field Platform
 
-WARPi is the portable security field platform. It supports:
-
-- Normal trusted-network mode
-- Field Mode with hotspot and capture services
-- Tailscale-backed management when approved
-- Mission control health checks
-- GPS and display state collection
-- Security actions through approved wrappers
+WARPi is the portable security field platform. It supports trusted-network operation, controlled field workflows, Tailscale-backed management when approved, health/state reporting, and security actions through approved wrappers.
 
 Active security tooling belongs on WARPi, the dedicated pentest VM, or other approved security devices, not on the general AI operations node by default.
 
