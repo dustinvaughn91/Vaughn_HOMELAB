@@ -21,7 +21,7 @@
   <img alt="GitHub Actions" src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white">
 </p>
 
-[Architecture](docs/architecture.md) • [Inventory](docs/inventory.md) • [Security Model](docs/security-model.md) • [Roadmap](docs/roadmap.md) • [WARPi](docs/runbooks/warpi-remote-ops.md) • [Security Policy](SECURITY.md)
+[Architecture](docs/architecture.md) • [Inventory](docs/inventory.md) • [Security Model](docs/security-model.md) • [Roadmap](docs/roadmap.md) • [WARPi](docs/runbooks/warpi-remote-ops.md) • [Security Policy](SECURITY.md) • [Privacy Policy](PRIVACY.md) • [Terms of Service](TERMS.md)
 
 </div>
 
