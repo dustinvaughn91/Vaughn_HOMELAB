@@ -12,6 +12,7 @@
 - Added a branded WARPi project overview with its dedicated platform logo, operating model, security boundaries, remote-operation wrappers, and public-safe mode-dispatcher documentation.
 - Refreshed the WARPi remote-operations runbook around approved wrappers, safe-stop behavior, dry-run mode planning, and public repository boundaries.
 - Added public-safe Holocron Family Terminal architecture notes covering shared/tablet use, household calendar workflow intent, private reverse-proxy access, and role-boundary expectations.
+- Added Holocron Settings V1 with authenticated per-account themes, accessibility preferences, notification intent controls, and accepted mobile/desktop behavior.
 
 ## Near Term
 
@@ -23,7 +24,7 @@
 - Add rendered architecture and workflow diagrams.
 - Add a public-safe restoration and power-state operations summary.
 - Add a public-safe Guardian overview that explains telemetry sources and visibility limits without exposing private logs.
-- Add a dedicated Holocron UI/UX baseline milestone that reviews all Holocron surfaces together instead of over-polishing the first Family Terminal tablet baseline.
+- Add a dedicated Holocron UI/UX baseline milestone that reviews all Holocron surfaces together after the accepted Settings V1 and mobile composer baseline.
 
 ## Medium Term
 

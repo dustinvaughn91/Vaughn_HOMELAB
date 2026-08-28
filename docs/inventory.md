@@ -6,6 +6,8 @@ This inventory is intentionally public-safe. It describes system roles, normal p
 
 | System | Role | Normal State | Public-Safe Posture |
 | --- | --- | --- | --- |
+| Proxmox cluster | Virtualization platform | Always-on | Private two-node cluster virtualization layer |
+| netcore01 | Infrastructure appliance | Always-on | Physical witness and DNS/Tailscale appliance |
 | Proxmox host | Virtualization platform | Always-on | Private virtualization layer |
 | OpenClaw/K.E.R.N.E.L. node | AI operations workspace | Always-on | Protected control-plane environment |
 | Holocron | Private web UI | Always-on | Private UI for family/root workflows |
@@ -45,7 +47,9 @@ Holocron is the private web UI for K.E.R.N.E.L. and family-facing workflows. It 
 
 Holocron is always-on because it is a private service surface and a user entry point. It depends on the OpenClaw/K.E.R.N.E.L. side for agent responses and on the ticketing system for GLPI-backed ticket intake.
 
-Holocron application users are separate from Linux machine-login accounts. A Family Terminal mode provides a shared/tablet-oriented station identity for household use without turning that station into a personal account. Public docs describe the role model without publishing live user records, private URLs, session keys, calendar identifiers, or credentials.
+Holocron application users are separate from Linux machine-login accounts. A Family Terminal mode provides a shared/tablet-oriented station identity for household use without turning that station into a personal account. Per-account UI preferences now cover theme, accessibility, and notification intent while keeping settings isolated to the authenticated Holocron account.
+
+Public docs describe the role model and preference surface without publishing live user records, private URLs, session keys, calendar identifiers, notification delivery internals, or credentials.
 
 ### AdGuard DNS
 
