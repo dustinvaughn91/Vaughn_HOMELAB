@@ -28,7 +28,7 @@ This is a public-safe summary of the current environment audit. Live operational
 | Public release checks need automation. | High | Manual review alone can miss secrets or private infrastructure details. | Add automated release-gate checks for secrets, private network indicators, and documentation quality. | K.E.R.N.E.L. | Open | 2026-07-17 |
 | Guardian does not have full bridge-wide packet visibility. | Medium | Overstating visibility could weaken detection assumptions. | Add mirror/TAP/sensor design only after explicit approval. | K.E.R.N.E.L. | Open | 2026-08-09 |
 | Protected systems need separately approved documentation/audit depth. | Medium | Public docs should not imply routine agent control where the authority boundary is intentionally limited. | Document protected roles at a high level until access is approved. | K.E.R.N.E.L. | Open | 2026-08-09 |
-| Autostart needs an approved recovery hardening pass. | Medium | A host can appear recovered while individual workloads remain stopped if guest-start failures are only visible in private task logs. | Apply explicit startup ordering and a controlled reboot validation plan only during a separately approved maintenance window. | K.E.R.N.E.L. | Open | 2026-08-28 |
+| Autostart reboot proof remains pending. | Medium | A host can appear recovered while individual workloads remain stopped if guest-start failures are only visible in private task logs. | Metadata policy and staged ordering are remediated; complete the controlled reboot proof only during a separately approved maintenance window. | K.E.R.N.E.L. | In progress | 2026-08-28 |
 
 ## Notes
 
