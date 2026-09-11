@@ -1,6 +1,6 @@
 # Audit Findings
 
-Snapshot date: 2026-08-28 UTC
+Snapshot date: 2026-09-11 UTC
 
 This is a public-safe summary of the current environment audit. Live operational details, service discovery output, and private telemetry remain in private notes only.
 
@@ -18,6 +18,7 @@ This is a public-safe summary of the current environment audit. Live operational
 | K.E.R.N.E.L. key-based admin and root break-glass model is documented. | Low | Reduces confusion between routine admin and emergency recovery. | Keep private keys and recovery secrets out of public docs. | K.E.R.N.E.L. | In progress | 2026-08-09 |
 | Always-on versus on-demand power posture is documented. | Low | Reduces idle attack surface and resource drift. | Keep docs aligned with Proxmox policy. | K.E.R.N.E.L. | In progress | 2026-08-09 |
 | Proxmox autostart behavior has a private forensic audit trail. | Low | Recovery planning is stronger when autostart failures are tied to evidence instead of assumptions. | Keep explicit startup order, dependency validation, and reboot proof-test notes in private operational documentation. | K.E.R.N.E.L. | In progress | 2026-08-28 |
+| DNS service address reconciled to current production state. | Info | Chasing a stale address wastes effort and can mislead cutover planning. | Keep the DNS service documented at its live, verified address. | K.E.R.N.E.L. | Resolved | 2026-09-11 |
 
 ## Current Gaps
 
@@ -29,6 +30,9 @@ This is a public-safe summary of the current environment audit. Live operational
 | Guardian does not have full bridge-wide packet visibility. | Medium | Overstating visibility could weaken detection assumptions. | Add mirror/TAP/sensor design only after explicit approval. | K.E.R.N.E.L. | Open | 2026-08-09 |
 | Protected systems need separately approved documentation/audit depth. | Medium | Public docs should not imply routine agent control where the authority boundary is intentionally limited. | Document protected roles at a high level until access is approved. | K.E.R.N.E.L. | Open | 2026-08-09 |
 | Autostart reboot proof remains pending. | Medium | A host can appear recovered while individual workloads remain stopped if guest-start failures are only visible in private task logs. | Metadata policy and staged ordering are remediated; complete the controlled reboot proof only during a separately approved maintenance window. | K.E.R.N.E.L. | In progress | 2026-08-28 |
+| Routed lab boundary management policy requires reconciliation. | Medium | Inbound management traffic is currently dropped by the guest firewall because no applicable allow rule exists; whether this is intentional hardening or configuration drift is unconfirmed. | Confirm the intended management policy and keep an explicit, documented allow path if operations-node management is intended. | K.E.R.N.E.L. | Open | 2026-09-11 |
+| Research-helper web retrieval is intermittent/unreliable while its service socket and local containers remain healthy. | Low | Retrieval quality is inconsistent, and socket health alone does not indicate a working search path. | Track helper reliability as its own finding and monitor backend/search-engine health separately from socket health. | K.E.R.N.E.L. | Open | 2026-09-11 |
+| Internal compatibility paths for private web services were not reachable during the audit. | Medium | Ticket intake and legacy private paths can be unavailable without an obvious cause. | Restore and verify the compatibility paths before relying on them in workflows. | K.E.R.N.E.L. | Open | 2026-09-11 |
 
 ## Notes
 
